@@ -3,7 +3,6 @@ package com.setronica.eventing.persistence;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -40,8 +39,6 @@ public class EventRepository {
             String json = objectMapper.writeValueAsString(events);
             Path filePath = Path.of(getClass().getResource(JSON_FILE_PATH).toURI());
             Files.writeString(filePath, json);
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }

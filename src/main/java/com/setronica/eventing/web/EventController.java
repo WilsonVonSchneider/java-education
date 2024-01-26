@@ -3,12 +3,9 @@ package com.setronica.eventing.web;
 import com.setronica.eventing.app.EventService;
 import com.setronica.eventing.persistence.Event;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -37,14 +34,12 @@ public class EventController {
      * that match the specified criteria along with an HTTP status code indicating the result.
      */
     @GetMapping
-    public ResponseEntity<List<Event>> list(
+    public List<Event> list(
             @RequestParam(name = "search", required = false) String search,
             @RequestParam(name = "sort", defaultValue = "ASC", required = false) String sort,
             @RequestParam(name = "sortBy", defaultValue = "title", required = false) String sortBy) {
 
-        List<Event> events = eventService.list(search, sort, sortBy);
-
-        return ResponseEntity.status(HttpStatus.OK).body(events);
+        return eventService.list(search, sort, sortBy);
     }
 
     /**
@@ -59,11 +54,8 @@ public class EventController {
      * NOT FOUND (404) along with an empty body.
      */
     @GetMapping("{id}")
-    public ResponseEntity<Optional<Event>> show(@PathVariable Long id) {
-        Optional<Event> event = eventService.show(id);
-
-        return event.map(e -> ResponseEntity.ok().body(event))
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(event));
+    public Event show(@PathVariable Long id) {
+        return eventService.show(id);
     }
 
 
@@ -79,9 +71,7 @@ public class EventController {
      * data is not valid, the response returns HTTP status BAD REQUEST (400) along with an error message.
      */
     @PostMapping
-    public ResponseEntity<Event> createEvent(@Valid @RequestBody Event requestData) {
-        Event newEvent = eventService.create(requestData);
-
-        return ResponseEntity.status(HttpStatus.OK).body(newEvent);
+    public Event createEvent(@Valid @RequestBody Event requestData) {
+        return eventService.create(requestData);
     }
 }
