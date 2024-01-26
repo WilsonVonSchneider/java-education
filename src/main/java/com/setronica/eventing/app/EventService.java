@@ -5,7 +5,6 @@ import com.setronica.eventing.persistence.EventRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -32,12 +31,10 @@ public class EventService {
         return Event.sort(events, sortBy, sort);
     }
 
-    public Optional<Event> show(Long id) {
-        List<Event> events = eventRepository.getAll();
-
-        return events.stream()
+    public Event show(Long id) {
+        return eventRepository.getAll().stream()
                 .filter(e -> e.getId() == id)
-                .findFirst();
+                .findFirst().orElse(null);
     }
 
     /**
@@ -58,7 +55,6 @@ public class EventService {
 
         // Add the new event to the list
         existingEvents.add(createEvent);
-
 
         eventRepository.create(existingEvents);
 
