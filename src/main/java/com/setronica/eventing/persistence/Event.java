@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "\"event\"")
+@Table(name = "\"events\"")
 public class Event {
 
     @Id
