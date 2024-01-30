@@ -25,7 +25,7 @@ public class Event {
     @NotBlank(message = "Title cannot be blank")
     private String title;
     @Column
-    @NotBlank(message = "Title cannot be blank")
+    @NotBlank(message = "Description cannot be blank")
     private String description;
     @Column
     @NotNull(message = "Date cannot be null")
