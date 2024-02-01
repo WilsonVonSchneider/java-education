@@ -1,8 +1,9 @@
 package com.setronica.eventing.app;
 
+import com.setronica.eventing.dto.EventUpdate;
+import com.setronica.eventing.exceptions.NotFoundException;
 import com.setronica.eventing.persistence.Event;
 import com.setronica.eventing.persistence.EventRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,32 +17,25 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public List<Event> list() {
+    public List<Event> getAll() {
+
         return eventRepository.findAll();
     }
 
-    public Event show(int id) {
-        return eventRepository.findById(id).orElse(null);
+    public Event findById(Integer id) {
+        return eventRepository.findById(id).orElseThrow(() -> new NotFoundException("Event not found with id=" + id));
     }
 
     public Event save(Event event) {
         return eventRepository.save(event);
     }
 
-    public Event update(int id, Event updateEvent) {
-        Event event = eventRepository.findById(id).orElse(null);
-
-        if (event != null) {
-            event.setTitle(updateEvent.getTitle());
-            event.setDescription(updateEvent.getDescription());
-            event.setDate(updateEvent.getDate());
-
-            return eventRepository.save(event);
-        } else {
-            throw new EntityNotFoundException("Event with id " + id + " not found");
-        }
+    public Event update(EventUpdate eventUpdate, Event existingEvent) {
+        existingEvent.setTitle(eventUpdate.getTitle());
+        existingEvent.setDescription(eventUpdate.getDescription());
+        existingEvent.setDate(eventUpdate.getDate());
+        return eventRepository.save(existingEvent);
     }
-
 
     public void delete(int id) {
         eventRepository.deleteById(id);
