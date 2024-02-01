@@ -26,7 +26,7 @@ public class TicketOrderService {
     }
 
     public TicketOrder save(TicketOrder ticketOrder, int id) {
-        ticketOrder.setEventId(id);
+        ticketOrder.setEventScheduleId(id);
         return ticketOrderRepository.save(ticketOrder);
     }
 

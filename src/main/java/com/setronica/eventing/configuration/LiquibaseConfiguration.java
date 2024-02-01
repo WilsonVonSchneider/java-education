@@ -15,8 +15,4 @@ public class LiquibaseConfiguration {
         liquibase.setDataSource(dataSource);
         return liquibase;
     }
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
