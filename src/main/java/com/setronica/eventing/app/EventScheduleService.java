@@ -33,6 +33,7 @@ public class EventScheduleService {
         if (existingEventSchedules.isEmpty()) {
             eventSchedule.setEventId(exsistingEvent.getId());
             eventSchedule.setEventDate(exsistingEvent.getDate());
+
             return eventScheduleRepository.save(eventSchedule);
         }
         throw new EventScheduleAlreadyExists("Event schedule for this event already exists");
@@ -41,6 +42,7 @@ public class EventScheduleService {
     public EventSchedule update(EventSchedule existingEventSchedule, EventScheduleUpdate eventScheduleUpdate) {
         existingEventSchedule.setPrice(eventScheduleUpdate.getPrice());
         existingEventSchedule.setAvailableSeats(eventScheduleUpdate.getAvailableSeats());
+        
         return eventScheduleRepository.save(existingEventSchedule);
     }
 

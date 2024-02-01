@@ -38,12 +38,14 @@ public class EventController {
     @PutMapping("{id}")
     public Event update(@PathVariable Integer id, @RequestBody EventUpdate updatedEvent) {
         Event existingEvent = eventService.findById(id);
+        
         return eventService.update(updatedEvent, existingEvent);
     }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Integer id) {
         Event existingEvent = eventService.findById(id);
+
         eventService.delete(existingEvent.getId());
     }
 }

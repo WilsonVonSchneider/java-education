@@ -18,7 +18,6 @@ public class EventService {
     }
 
     public List<Event> getAll() {
-
         return eventRepository.findAll();
     }
 
@@ -34,6 +33,7 @@ public class EventService {
         existingEvent.setTitle(eventUpdate.getTitle());
         existingEvent.setDescription(eventUpdate.getDescription());
         existingEvent.setDate(eventUpdate.getDate());
+        
         return eventRepository.save(existingEvent);
     }
 

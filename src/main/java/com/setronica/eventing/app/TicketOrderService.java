@@ -27,6 +27,7 @@ public class TicketOrderService {
 
     public TicketOrder save(TicketOrder ticketOrder, int id) {
         ticketOrder.setEventScheduleId(id);
+        
         return ticketOrderRepository.save(ticketOrder);
     }
 
@@ -35,6 +36,7 @@ public class TicketOrderService {
         existingTicketOrder.setLastname(ticketOrderUpdate.getLastname());
         existingTicketOrder.setEmail(ticketOrderUpdate.getEmail());
         existingTicketOrder.setAmount(ticketOrderUpdate.getAmount());
+
         return ticketOrderRepository.save(existingTicketOrder);
     }
 

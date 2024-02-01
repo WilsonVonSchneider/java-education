@@ -37,18 +37,21 @@ public class EventScheduleController {
     @PostMapping("{id}/event_schedules")
     public EventSchedule create(@PathVariable Integer id, @Valid @RequestBody EventSchedule eventSchedule) {
         Event existingEvent = eventService.findById(id);
+
         return eventScheduleService.save(eventSchedule, existingEvent);
     }
 
     @PutMapping("event_schedules/{id}")
     public EventSchedule update(@PathVariable Integer id, @RequestBody EventScheduleUpdate eventScheduleUpdate) {
         EventSchedule existingScheduleEvent = eventScheduleService.findById(id);
+
         return eventScheduleService.update(existingScheduleEvent, eventScheduleUpdate);
     }
 
     @DeleteMapping("event_schedules/{id}")
     public void delete(@PathVariable Integer id) {
         EventSchedule existingEvent = eventScheduleService.findById(id);
+        
         eventScheduleService.delete(existingEvent.getId());
     }
 }

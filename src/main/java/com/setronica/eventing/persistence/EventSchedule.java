@@ -15,12 +15,16 @@ public class EventSchedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(nullable = false)
     private Integer eventId;
+
     @Column(nullable = false)
     private LocalDate eventDate;
+
     @Column(nullable = false)
     private Integer availableSeats;
+    
     @Column(nullable = false)
     private BigDecimal price;
 }
