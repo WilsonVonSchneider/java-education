@@ -2,16 +2,13 @@ package com.setronica.eventing.app;
 
 import com.setronica.eventing.persistence.Event;
 import com.setronica.eventing.persistence.EventRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-
 
 @Service
 public class EventService {
-
 
     private final EventRepository eventRepository;
 
@@ -19,45 +16,35 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public List<Event> list(String search, String sort, String sortBy) {
-        List<Event> events = eventRepository.getAll();
+    public List<Event> list() {
+        return eventRepository.findAll();
+    }
 
-        if (search != null) {
-            return events.stream()
-                    .filter(event -> event.getTitle().toLowerCase().contains(search.toLowerCase()))
-                    .collect(Collectors.toList());
+    public Event show(int id) {
+        return eventRepository.findById(id).orElse(null);
+    }
+
+    public Event save(Event event) {
+        return eventRepository.save(event);
+    }
+
+    public Event update(int id, Event updateEvent) {
+        Event event = eventRepository.findById(id).orElse(null);
+
+        if (event != null) {
+            event.setTitle(updateEvent.getTitle());
+            event.setDescription(updateEvent.getDescription());
+            event.setDate(updateEvent.getDate());
+
+            return eventRepository.save(event);
+        } else {
+            throw new EntityNotFoundException("Event with id " + id + " not found");
         }
-
-        return Event.sort(events, sortBy, sort);
     }
 
-    public Event show(Long id) {
-        return eventRepository.getAll().stream()
-                .filter(e -> e.getId() == id)
-                .findFirst().orElse(null);
+
+    public void delete(int id) {
+        eventRepository.deleteById(id);
     }
 
-    /**
-     * This method serves as a demonstration for storing data to a JSON file. In a real-world scenario,
-     * the file, located in the resources/static directory, is read-only. Consequently, this method
-     * returns the newly created event, but it will not actually be added to the JSON file.
-     */
-    public Event create(Event requestData) {
-        Event createEvent = new Event();
-        createEvent.setId(new Random().nextInt(101));
-        createEvent.setTitle(requestData.getTitle());
-        createEvent.setDate(requestData.getDate());
-        createEvent.setDescription(requestData.getDescription());
-        createEvent.setImages(Event.getDemoImages());
-
-        // Read existing events from the JSON file
-        List<Event> existingEvents = eventRepository.getAll();
-
-        // Add the new event to the list
-        existingEvents.add(createEvent);
-
-        eventRepository.create(existingEvents);
-
-        return createEvent;
-    }
 }

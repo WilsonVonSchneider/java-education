@@ -1,0 +1,36 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="20240126-1" author="matej.zagar">
+
+        <!--Table definition -->
+
+        <createTable tableName="events">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Also possible SQL definition -->
+
+        <!--<sql>
+            CREATE TABLE events (
+                                   id SERIAL PRIMARY KEY,
+                                   title VARCHAR(255) NOT NULL,
+                                   description TEXT,
+                                   date TIMESTAMP NOT NULL,
+            );
+        </sql>-->
+
+    </changeSet>
+</databaseChangeLog>
