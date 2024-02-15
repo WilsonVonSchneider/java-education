@@ -2,7 +2,7 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet id="20240126-1" author="matej.zagar">
+    <changeSet id="20240126-1" author="alex.glebov">
 
         <!--Table definition -->
 
@@ -20,17 +20,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-
-        <!-- Also possible SQL definition -->
-
-        <!--<sql>
-            CREATE TABLE events (
-                                   id SERIAL PRIMARY KEY,
-                                   title VARCHAR(255) NOT NULL,
-                                   description TEXT,
-                                   date TIMESTAMP NOT NULL,
-            );
-        </sql>-->
+        <comment>Create `event` table</comment>
 
     </changeSet>
 </databaseChangeLog>

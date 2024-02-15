@@ -17,12 +17,20 @@
             create table ticket_orders
             (
                 id                serial primary key,
-                event_schedule_id int          not null,
-                firstname         varchar(255) not null,
-                lastname          varchar(255) not null,
-                email             varchar(255) not null,
-                amount            int          not null
+                event_schedule_id int            not null,
+                firstname         varchar(255)   not null,
+                lastname          varchar(255)   not null,
+                email             varchar(255)   not null,
+                amount            int            not null,
+                price             decimal(10, 2) not null,
+                status            varchar(255)   not null DEFAULT 'BOOKED'
             );
         </sql>
+        <addForeignKeyConstraint baseTableName="event_schedule" baseColumnNames="event_id" constraintName="fk_event_id"
+                                 referencedTableName="events" referencedColumnNames="id" onDelete="CASCADE"
+                                 onUpdate="RESTRICT"/>
+        <addForeignKeyConstraint baseTableName="ticket_orders" baseColumnNames="event_schedule_id"
+                                 constraintName="fk_event_schedule_id" referencedTableName="event_schedule"
+                                 referencedColumnNames="id" onDelete="CASCADE" onUpdate="RESTRICT"/>
     </changeSet>
 </databaseChangeLog>
