@@ -1,5 +1,6 @@
-package com.setronica.eventing.persistence;
+package com.setronica.eventing.persistence.Events;
 
+import com.setronica.eventing.persistence.Tickets.TicketOrder;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,14 +18,19 @@ public class EventSchedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "event_id")
     private int eventId;
+
     @Column(nullable = false)
     private LocalDate eventDate;
+
     @Column(nullable = false)
     private Integer availableSeats;
+
     @Column(nullable = false)
     private BigDecimal price;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "event_schedule_id")
     private List<TicketOrder> ticketOrders = new ArrayList<>();

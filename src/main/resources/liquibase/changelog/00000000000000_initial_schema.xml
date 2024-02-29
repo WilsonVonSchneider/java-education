@@ -20,7 +20,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <comment>Create `event` table</comment>
+        <comment>Create `events` table</comment>
 
     </changeSet>
 </databaseChangeLog>

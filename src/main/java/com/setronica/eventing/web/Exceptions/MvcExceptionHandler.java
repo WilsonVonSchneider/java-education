@@ -1,10 +1,11 @@
-package com.setronica.eventing.web;
+package com.setronica.eventing.web.Exceptions;
 
 import com.setronica.eventing.dto.ApplicationExceptionDto;
 import com.setronica.eventing.exceptions.ApplicationLogicException;
 import com.setronica.eventing.exceptions.NotEnoughSeats;
 import com.setronica.eventing.exceptions.NotFoundException;
 import com.setronica.eventing.exceptions.OrderAlreadyProcessed;
+import com.setronica.eventing.web.Events.EventController;
 import org.slf4j.Logger;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ public class MvcExceptionHandler {
     public ResponseEntity<ApplicationExceptionDto> handleApplicationLogicException(ApplicationLogicException ex) {
         log.error("Something went wrong");
         ApplicationExceptionDto exceptionDto = new ApplicationExceptionDto(ex.getMessage());
+
         return new ResponseEntity<>(exceptionDto, HttpStatusCode.valueOf(500));
     }
 
@@ -27,6 +29,7 @@ public class MvcExceptionHandler {
     public ResponseEntity<ApplicationExceptionDto> handleNotFoundException(NotFoundException ex) {
         log.error("Entity not found");
         ApplicationExceptionDto exceptionDto = new ApplicationExceptionDto(ex.getMessage());
+
         return new ResponseEntity<>(exceptionDto, HttpStatusCode.valueOf(404));
     }
 
@@ -34,6 +37,7 @@ public class MvcExceptionHandler {
     public ResponseEntity<ApplicationExceptionDto> handleNotEnoughSeats(NotEnoughSeats ex) {
         log.error("Not enough seats for selected event");
         ApplicationExceptionDto exceptionDto = new ApplicationExceptionDto(ex.getMessage());
+
         return new ResponseEntity<>(exceptionDto, HttpStatusCode.valueOf(400));
     }
 
@@ -41,6 +45,7 @@ public class MvcExceptionHandler {
     public ResponseEntity<ApplicationExceptionDto> handleOrderAlreadyProcessed(OrderAlreadyProcessed ex) {
         log.error("Can't modify already processed order");
         ApplicationExceptionDto exceptionDto = new ApplicationExceptionDto(ex.getMessage());
+        
         return new ResponseEntity<>(exceptionDto, HttpStatusCode.valueOf(400));
     }
 }

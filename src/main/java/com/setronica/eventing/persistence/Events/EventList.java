@@ -1,4 +1,4 @@
-package com.setronica.eventing.persistence;
+package com.setronica.eventing.persistence.Events;
 
 import java.util.ArrayList;
 
