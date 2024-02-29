@@ -1,8 +1,10 @@
-package com.setronica.eventing.web;
+package com.setronica.eventing.web.Payments;
 
-import com.setronica.eventing.app.PaymentRecordService;
-import com.setronica.eventing.app.TicketOrderService;
-import com.setronica.eventing.persistence.TicketOrder;
+import com.setronica.eventing.app.Payments.PaymentRecordService;
+import com.setronica.eventing.app.Tickets.TicketOrderService;
+import com.setronica.eventing.persistence.Tickets.TicketOrder;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,9 +24,11 @@ public class PaymentRecordController {
     }
 
     @PostMapping("{id}/pay")
+    @Operation(tags = {"Payment record"}, summary = "Endpoint that tries to execute payment and creates payment record in database")
+    @ApiResponse(responseCode = "500", description = "Internal server error")
     public void pay(@PathVariable Integer id) {
-        log.info("Request to pay ticket order");
-        TicketOrder existingTicketOrder = ticketOrderService.findById(id);
+        TicketOrder existingTicketOrder = ticketOrderService.show(id);
+
         paymentRecordService.pay(existingTicketOrder);
     }
 

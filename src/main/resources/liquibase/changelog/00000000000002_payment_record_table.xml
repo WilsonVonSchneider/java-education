@@ -8,8 +8,9 @@
         <sql>
             create table payment_records
             (
-                id    int primary key,
-                total decimal(10, 2) not null
+            id int primary key,
+            total decimal(10, 2) not null,
+            status varchar(255) not null DEFAULT 'PROCESSING'
             );
         </sql>
         <addForeignKeyConstraint baseTableName="payment_records" baseColumnNames="id"
