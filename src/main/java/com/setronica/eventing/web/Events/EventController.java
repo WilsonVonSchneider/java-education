@@ -56,7 +56,7 @@ public class EventController {
     }
 
     @PutMapping("{id}")
-    @Operation(tags = {"Event management"}, summary = "Updates existing event")
+    @Operation(tags = {"Events"}, summary = "Updates existing event")
     @ApiResponse(responseCode = "404", description = "Event not found")
     @ApiResponse(responseCode = "400", description = "Bad request")
     @ApiResponse(responseCode = "500", description = "Internal server error")

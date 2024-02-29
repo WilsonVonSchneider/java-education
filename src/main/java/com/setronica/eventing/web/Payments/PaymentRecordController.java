@@ -24,7 +24,7 @@ public class PaymentRecordController {
     }
 
     @PostMapping("{id}/pay")
-    @Operation(tags = {"Payment record"}, summary = "Endpoint that tries to execute payment and creates payment record in database")
+    @Operation(tags = {"Payment records"}, summary = "Endpoint that tries to execute payment and creates payment record in database")
     @ApiResponse(responseCode = "500", description = "Internal server error")
     public void pay(@PathVariable Integer id) {
         TicketOrder existingTicketOrder = ticketOrderService.show(id);

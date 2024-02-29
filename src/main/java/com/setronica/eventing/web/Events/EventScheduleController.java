@@ -27,7 +27,7 @@ public class EventScheduleController {
     }
 
     @PostMapping("{id}/event_schedule")
-    @Operation(tags = {"Event schedules"}, summary = "Endpoint that creates new schedule for event")
+    @Operation(tags = {"Event schedule"}, summary = "Endpoint that creates new schedule for event")
     @ApiResponse(responseCode = "400", description = "Bad request")
     @ApiResponse(responseCode = "400", description = "Not enough seats available")
     @ApiResponse(responseCode = "500", description = "Internal server error")
@@ -48,13 +48,13 @@ public class EventScheduleController {
     }
 
     @GetMapping("event_schedules")
-    @Operation(tags = {"Event schedules"}, summary = "Endpoint that returns a list of all event schedules")
+    @Operation(tags = {"Event schedule"}, summary = "Endpoint that returns a list of all event schedules")
     @ApiResponse(responseCode = "500", description = "Internal server error")
     public List<EventSchedule> list() {
         return eventScheduleService.list();
     }
 
-    @DeleteMapping("event_schedules/{id}")
+    @DeleteMapping("event_schedule/{id}")
     @Operation(tags = {"Event schedule"}, summary = "Endpoint that deletes event schedule by id")
     @ApiResponse(responseCode = "404", description = "Event schedule not found")
     @ApiResponse(responseCode = "500", description = "Internal server error")

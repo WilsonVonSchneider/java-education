@@ -63,13 +63,13 @@ public class TicketOrderController {
     }
 
     @PutMapping("ticket_orders/{id}")
-    @Operation(tags = {"Ticket order management"}, summary = "Updates existing ticket order")
+    @Operation(tags = {"Ticket orders"}, summary = "Updates existing ticket order")
     @ApiResponse(responseCode = "404", description = "Ticket order not found")
     @ApiResponse(responseCode = "400", description = "Bad request")
     @ApiResponse(responseCode = "500", description = "Internal server error")
     public TicketOrder update(@PathVariable Integer id, @RequestBody TicketOrderUpdate ticketOrderUpdate) {
         TicketOrder existingTicketOrder = ticketOrderService.show(id);
-        
+
         return ticketOrderService.update(existingTicketOrder, ticketOrderUpdate);
     }
 
